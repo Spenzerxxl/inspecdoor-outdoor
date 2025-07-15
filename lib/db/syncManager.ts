@@ -61,10 +61,45 @@ class SyncManager {
       
       await offlineDB.storeCustomers(customers || []);
 
+      // 2. Download Delivery Locations (Lieferorte)
+      onProgress?.({
+        stage: 'delivery_locations',
+        progress: 30,
+        message: 'Lade Lieferorte...',
+        completed: false
+      });
+
+      const { data: deliveryLocations, error: deliveryLocationsError } = await this.supabase
+        .from('delivery_locations')
+        .select('*')
+        .order('location_name');
+
+      if (deliveryLocationsError) throw new Error(`Lieferorte-Download fehlgeschlagen: ${deliveryLocationsError.message}`);
+      
+      // TODO: Store delivery_locations when offlineDB is extended
+      console.log(`✅ ${deliveryLocations?.length || 0} Lieferorte geladen (noch nicht gespeichert)`);
+
+      // 3. Download Sites (Standorte)
+      onProgress?.({
+        stage: 'sites',
+        progress: 40,
+        message: 'Lade Standorte...',
+        completed: false
+      });
+
+      const { data: sites, error: sitesError } = await this.supabase
+        .from('sites')
+        .select('*')
+        .order('site_name');
+
+      if (sitesError) throw new Error(`Standorte-Download fehlgeschlagen: ${sitesError.message}`);
+      
+      // TODO: Store sites when offlineDB is extended
+      console.log(`✅ ${sites?.length || 0} Standorte geladen (noch nicht gespeichert)`);
       // 2. Download Doors
       onProgress?.({
         stage: 'doors',
-        progress: 50,
+        progress: 60,
         message: 'Lade Türen...',
         completed: false
       });
@@ -81,7 +116,7 @@ class SyncManager {
       // 3. Download recent Inspections (letzte 30 Tage)
       onProgress?.({
         stage: 'inspections',
-        progress: 80,
+        progress: 75,
         message: 'Lade aktuelle Prüfungen...',
         completed: false
       });
@@ -102,6 +137,23 @@ class SyncManager {
       
       await offlineDB.storeInspections(syncedInspections);
 
+      // 5. Download Plans (Gebäudepläne)
+      onProgress?.({
+        stage: 'plans',
+        progress: 90,
+        message: 'Lade Pläne...',
+        completed: false
+      });
+
+      const { data: plans, error: plansError } = await this.supabase
+        .from('plans')
+        .select('*')
+        .order('plan_name');
+
+      if (plansError) throw new Error(`Pläne-Download fehlgeschlagen: ${plansError.message}`);
+      
+      // TODO: Store plans when offlineDB is extended
+      console.log(`✅ ${plans?.length || 0} Pläne geladen (noch nicht gespeichert)`);
       // 4. Update Sync Status
       await offlineDB.updateSyncStatus({
         last_download: new Date().toISOString(),
@@ -111,7 +163,7 @@ class SyncManager {
       onProgress?.({
         stage: 'complete',
         progress: 100,
-        message: `✅ Bereit für Offline-Arbeit! ${customers?.length || 0} Kunden, ${doors?.length || 0} Türen geladen.`,
+        message: `✅ Bereit für Offline-Arbeit! ${customers?.length || 0} Kunden, ${deliveryLocations?.length || 0} Lieferorte, ${sites?.length || 0} Standorte, ${doors?.length || 0} Türen, ${plans?.length || 0} Pläne geladen.`,
         completed: true
       });
 
