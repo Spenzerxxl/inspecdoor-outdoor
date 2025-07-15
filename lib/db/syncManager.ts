@@ -72,7 +72,7 @@ class SyncManager {
       const { data: doors, error: doorsError } = await this.supabase
         .from('doors')
         .select('*')
-        .order('location');
+        .order('door_id');
 
       if (doorsError) throw new Error(`Türen-Download fehlgeschlagen: ${doorsError.message}`);
       
