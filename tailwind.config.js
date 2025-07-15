@@ -49,22 +49,6 @@ module.exports = {
       },
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
-      // 🔧 TABLET-OPTIMIERUNGEN
-      spacing: {
-        'touch-44': '44px',  // Apple Guidelines: Min. 44px Touch-Targets
-        'touch-48': '48px',  // Android Guidelines: Min. 48px
-        'finger-gap': '8px', // Spacing zwischen Touch-Targets
-      },
-      fontSize: {
-        'touch-sm': ['16px', '24px'],  // Tablet-lesbare Schriftgröße
-        'touch-base': ['18px', '28px'],
-        'touch-lg': ['20px', '32px'],
-      },
-      screens: {
-        'tablet-p': '768px',   // Tablet Portrait
-        'tablet-l': '1024px',  // Tablet Landscape
-        'touch': { 'raw': '(pointer: coarse)' }, // Touch-Geräte
       }
     },
   },

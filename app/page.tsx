@@ -53,6 +53,7 @@ export default function Home() {
             {/* 🔧 HEADER */}
             <div className="text-center mb-8">
               <h1 className="text-3xl tablet-p:text-4xl font-bold text-foreground mb-2">
+                <img src="/inspecdoor-logo.svg" alt="InspecDoor Logo" className="h-12 mx-auto mb-4" />
                 InspecDoor Outdoor
               </h1>
               <p className="text-touch-base text-muted-foreground">

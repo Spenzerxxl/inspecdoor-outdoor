@@ -86,9 +86,7 @@ class SyncManager {
         completed: false
       });
 
-      const { data: inspections, error: inspectionsError } = await this.supabase
-        .from('inspections')
-        .select('*')
+      // Download all Inspections
         .order('inspection_date', { ascending: false });
 
       if (inspectionsError) throw new Error(`Prüfungen-Download fehlgeschlagen: ${inspectionsError.message}`);

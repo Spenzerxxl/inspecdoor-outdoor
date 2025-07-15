@@ -165,7 +165,7 @@ export function SyncControl({ className = '' }: SyncControlProps) {
                 Lädt Daten...
               </span>
             ) : (
-              '📥 Daten für heute laden'
+              '📥 Alle Daten laden'
             )}
           </button>
 

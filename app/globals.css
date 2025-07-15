@@ -2,145 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🔧 TABLET-OPTIMIERTE CSS-VARIABLEN */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  --accent: 210 40% 96%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-
-  --radius: 0.5rem;
-}
-
-/* 🔧 TABLET-TOUCH-OPTIMIERUNGEN */
 @layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+  }
+  
   * {
     @apply border-border;
   }
   
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-
-  /* Touch-friendly Button Styles */
-  .touch-button {
-    @apply min-h-touch-44 min-w-touch-44 px-6 py-3 rounded-md;
-    @apply text-touch-base font-medium;
-    @apply transition-colors duration-200;
-    @apply select-none;
-    touch-action: manipulation;
-  }
-
-  /* Touch-friendly Input Styles */
-  .touch-input {
-    @apply min-h-touch-44 px-4 py-3 rounded-md;
-    @apply text-touch-base;
-    @apply border border-input bg-background;
-    touch-action: manipulation;
-  }
-
-  /* Card Styles für Touch-Navigation */
-  .touch-card {
-    @apply p-6 rounded-lg border bg-card text-card-foreground;
-    @apply shadow-sm hover:shadow-md transition-shadow;
-    touch-action: manipulation;
-  }
-
-  /* Finger-friendly Spacing */
-  .finger-gap {
-    @apply gap-finger-gap;
-  }
-
-  /* Tablet-responsive Grid */
-  .tablet-grid {
-    @apply grid grid-cols-1 tablet-p:grid-cols-2 tablet-l:grid-cols-3;
-    @apply gap-6;
   }
 }
 
-/* 🔧 OFFLINE-INDICATOR STYLES */
-@layer components {
-  .offline-indicator {
-    @apply fixed top-4 left-4 right-4 z-50;
-    @apply bg-yellow-100 border border-yellow-300 text-yellow-800;
-    @apply px-4 py-2 rounded-md text-touch-sm;
-    @apply flex items-center gap-2;
+/* InspecDoor Camera Mirroring - High Specificity Fix */
+@layer utilities {
+  .camera-mirror-fix {
+    transform: scaleX(-1) !important;
   }
-
-  .sync-indicator {
-    @apply fixed bottom-4 right-4 z-50;
-    @apply bg-blue-100 border border-blue-300 text-blue-800;
-    @apply px-4 py-2 rounded-md text-touch-sm;
-    @apply flex items-center gap-2;
+  
+  .camera-mirror-fix video {
+    transform: scaleX(-1) !important;
+  }
+  
+  video.camera-mirror {
+    transform: scaleX(-1) !important;
   }
 }
 
-/* 🔧 DARK MODE SUPPORT */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+/* 🚀 MOBILE VIEWPORT FIX - InspecDoor PWA Optimization */
+@layer utilities {
+  /* 📱 Mobile Camera Container - Portrait-optimized aspect-ratio */
+  .mobile-camera-container {
+    aspect-ratio: 3/4 !important; /* Portrait optimiert für Mobile */
+    max-height: 70vh !important;
+    min-height: 50vh !important;
+  }
+  
+  /* 📱 Mobile Camera Video - Enhanced object-fit */
+  .mobile-camera-video {
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+  
+  /* 🎯 Tablet-specific optimization (768px - 1024px) */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .tablet-camera-container {
+      aspect-ratio: 4/3 !important; /* Tablet-optimiert */
+      max-height: 75vh !important;
+      min-height: 55vh !important;
+    }
+  }
+  
+  /* 💻 Desktop keeps original ratio (above 1024px) */
+  @media (min-width: 1025px) {
+    .desktop-camera-container {
+      aspect-ratio: var(--camera-aspect-ratio, 16/9) !important;
+      max-height: 80vh !important;
+      min-height: 60vh !important;
+    }
   }
 }
 
-/* 🔧 TABLET-SPECIFIC MEDIA QUERIES */
-@media (orientation: landscape) and (min-width: 768px) {
-  .landscape-optimized {
-    @apply flex-row;
-  }
+/* Touch-optimierte Targets für Mobile */
+.touch-target-44 {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
 }
 
-@media (orientation: portrait) and (max-width: 768px) {
-  .portrait-optimized {
-    @apply flex-col;
-  }
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
