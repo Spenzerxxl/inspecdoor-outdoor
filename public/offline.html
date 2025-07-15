@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InspecDoor Outdoor - Offline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 24px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background-color: #fbbf24;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #1e293b;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            color: #64748b;
+        }
+        
+        .touch-button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            min-height: 44px;
+            min-width: 44px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            touch-action: manipulation;
+        }
+        
+        .touch-button:hover {
+            background-color: #2563eb;
+        }
+        
+        .touch-button:active {
+            background-color: #1d4ed8;
+        }
+        
+        .status {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📵</div>
+        <h1>Offline-Modus</h1>
+        <p>Sie sind derzeit offline. InspecDoor Outdoor speichert Ihre Daten lokal und synchronisiert sie automatisch, sobald Sie wieder online sind.</p>
+        
+        <button class="touch-button" onclick="window.location.reload()">
+            🔄 Erneut versuchen
+        </button>
+        
+        <div class="status">
+            <strong>Offline-Features:</strong><br>
+            • Navigation zwischen Modulen<br>
+            • Lokale Datenspeicherung<br>
+            • Automatische Synchronisation
+        </div>
+    </div>
+</body>
+</html>
